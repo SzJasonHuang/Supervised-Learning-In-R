@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DSCI-Final-Project (2)</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Supervised_Learning_KNNClassification</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7521,18 +7521,58 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=081d0083-bcb9-47c4-b81a-e6ee80594323">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=081d0083-bcb9-47c4-b81a-e6ee80594323">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="nb">repr</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">tidymodels</span><span class="p">)</span>
+<div class="highlight hl-r"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">repr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidymodels</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>── <span class="ansi-bold">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">dplyr    </span> 1.1.4     <span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">readr    </span> 2.1.5
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">forcats  </span> 1.0.0     <span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">stringr  </span> 1.5.1
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">ggplot2  </span> 3.5.1     <span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">tibble   </span> 3.2.1
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">lubridate</span> 1.9.3     <span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">tidyr    </span> 1.3.1
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">purrr    </span> 1.0.2     
+── <span class="ansi-bold">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──
+<span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">dplyr</span>::<span class="ansi-green-fg">filter()</span> masks <span class="ansi-blue-fg">stats</span>::filter()
+<span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">dplyr</span>::<span class="ansi-green-fg">lag()</span>    masks <span class="ansi-blue-fg">stats</span>::lag()
+<span class="ansi-cyan-fg">ℹ</span> Use the conflicted package (<span class="ansi-blue-fg">&lt;http://conflicted.r-lib.org/&gt;</span>) to force all conflicts to become errors
+── <span class="ansi-bold">Attaching packages</span> ────────────────────────────────────── tidymodels 1.1.1 ──
+
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">broom       </span> 1.0.6     <span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">rsample     </span> 1.2.1
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">dials       </span> 1.3.0     <span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">tune        </span> 1.1.2
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">infer       </span> 1.0.7     <span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">workflows   </span> 1.1.4
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">modeldata   </span> 1.4.0     <span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">workflowsets</span> 1.0.1
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">parsnip     </span> 1.2.1     <span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">yardstick   </span> 1.3.1
+<span class="ansi-green-fg">✔</span> <span class="ansi-blue-fg">recipes     </span> 1.1.0     
+
+── <span class="ansi-bold">Conflicts</span> ───────────────────────────────────────── tidymodels_conflicts() ──
+<span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">scales</span>::<span class="ansi-green-fg">discard()</span> masks <span class="ansi-blue-fg">purrr</span>::discard()
+<span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">dplyr</span>::<span class="ansi-green-fg">filter()</span>   masks <span class="ansi-blue-fg">stats</span>::filter()
+<span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">recipes</span>::<span class="ansi-green-fg">fixed()</span>  masks <span class="ansi-blue-fg">stringr</span>::fixed()
+<span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">dplyr</span>::<span class="ansi-green-fg">lag()</span>      masks <span class="ansi-blue-fg">stats</span>::lag()
+<span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">yardstick</span>::<span class="ansi-green-fg">spec()</span> masks <span class="ansi-blue-fg">readr</span>::spec()
+<span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">recipes</span>::<span class="ansi-green-fg">step()</span>   masks <span class="ansi-blue-fg">stats</span>::step()
+<span class="ansi-blue-fg">•</span> Search for functions across packages at <span class="ansi-green-fg">https://www.tidymodels.org/find/</span>
+
+</pre>
 </div>
 </div>
 </div>
@@ -7646,16 +7686,16 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span>
-<span class="n">players_url</span> <span class="o">=</span> <span class="s1">'https://raw.githubusercontent.com/chantalfl18/project_template/refs/heads/main/Project/players.csv'</span>
-<span class="n">players</span> <span class="o">&lt;-</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">players_url</span><span class="p">)</span>
+<div class="highlight hl-r"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span>
+<span class="n">players_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'https://raw.githubusercontent.com/chantalfl18/project_template/refs/heads/main/Project/players.csv'</span>
+<span class="n">players</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="n">players_url</span><span class="p">)</span>
 
 <span class="c1">#finding summary statistics</span>
-<span class="n">avg_played_hours</span> <span class="o">&lt;-</span> <span class="n">players</span> <span class="o">|&gt;</span>
-    <span class="n">summarise</span><span class="p">(</span><span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">played_hours</span><span class="p">,</span> <span class="n">na</span><span class="o">.</span><span class="n">rm</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">))</span>
+<span class="n">avg_played_hours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">players</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">summarise</span><span class="p">(</span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">played_hours</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
 
-<span class="n">avg_age</span> <span class="o">&lt;-</span> <span class="n">players</span> <span class="o">|&gt;</span>
-    <span class="n">summarise</span><span class="p">(</span><span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">Age</span><span class="p">,</span> <span class="n">na</span><span class="o">.</span><span class="n">rm</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">))</span>
+<span class="n">avg_age</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">players</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">summarise</span><span class="p">(</span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="n">avg_played_hours</span>
 <span class="n">avg_age</span>
 </pre></div>
@@ -7722,13 +7762,13 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Figure 1</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1">#Figure 1</span>
 
-<span class="n">options</span><span class="p">(</span><span class="nb">repr</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="nb">repr</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span>
-<span class="n">hours_vs_age_plot</span> <span class="o">&lt;-</span> <span class="n">ggplot</span><span class="p">(</span><span class="n">players</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Age</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">played_hours</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">subscribe</span><span class="p">))</span> <span class="o">+</span>
-       <span class="n">geom_point</span><span class="p">()</span> <span class="o">+</span>
-       <span class="n">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">"Hours of game played vs Age"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"Age"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"Hours of game played"</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">"Subscribed to game-related newsletter"</span><span class="p">)</span> <span class="o">+</span>
-    <span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span> <span class="mi">20</span><span class="p">))</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">)</span>
+<span class="n">hours_vs_age_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">players</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">played_hours</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">subscribe</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">       </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">       </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Hours of game played vs Age"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="s">"Age"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="s">"Hours of game played"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Subscribed to game-related newsletter"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">))</span>
 <span class="n">hours_vs_age_plot</span>
 </pre></div>
 </div>
@@ -7775,12 +7815,12 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Figure 2</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1">#Figure 2</span>
 
-<span class="n">age_bar_plot</span> <span class="o">&lt;-</span><span class="n">ggplot</span><span class="p">(</span><span class="n">players</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Age</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">subscribe</span><span class="p">))</span> <span class="o">+</span>
-    <span class="n">geom_histogram</span><span class="p">(</span><span class="n">position</span> <span class="o">=</span> <span class="s2">"identity"</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span>
-    <span class="n">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">"Age Distribution by Subscription Status"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="s2">"Age"</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">"Count"</span><span class="p">)</span> <span class="o">+</span>
-    <span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">age_bar_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="nf">ggplot</span><span class="p">(</span><span class="n">players</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subscribe</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"identity"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Age Distribution by Subscription Status"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="w"> </span><span class="s">"Age"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Count"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">))</span>
 <span class="n">age_bar_plot</span>
 </pre></div>
 </div>
@@ -7826,12 +7866,12 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Figure 3</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1">#Figure 3</span>
 
-<span class="n">hours_bar_plot</span> <span class="o">&lt;-</span> <span class="n">ggplot</span><span class="p">(</span><span class="n">players</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">played_hours</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">subscribe</span><span class="p">))</span> <span class="o">+</span>
-    <span class="n">geom_histogram</span><span class="p">(</span><span class="n">position</span> <span class="o">=</span> <span class="s2">"identity"</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span>
-    <span class="n">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">"Played hours Distribution by Subscription Status"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="s2">"Hours of game played"</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">"Count"</span><span class="p">)</span> <span class="o">+</span>
-    <span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">hours_bar_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">players</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">played_hours</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subscribe</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"identity"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Played hours Distribution by Subscription Status"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="w"> </span><span class="s">"Hours of game played"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Count"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">))</span>
 <span class="n">hours_bar_plot</span>
 </pre></div>
 </div>
@@ -7880,9 +7920,9 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Cleaning the data, removing NAs </span>
-<span class="n">players_clean</span> <span class="o">&lt;-</span> <span class="n">players</span> <span class="o">|&gt;</span>
-  <span class="nb">filter</span><span class="p">(</span><span class="o">!</span>is.na<span class="o">(</span>Age<span class="o">))</span><span class="w"> </span><span class="p">|</span>&gt;<span class="w"> </span>filter<span class="o">(</span>!is.na<span class="o">(</span>played_hours<span class="o">))</span><span class="w"> </span><span class="p">|</span>&gt;<span class="w"> </span>filter<span class="o">(</span>!is.na<span class="o">(</span>subscribe<span class="o">))</span><span class="w">    </span>
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Cleaning the data, removing NAs </span>
+<span class="n">players_clean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">players</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">Age</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">played_hours</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">subscribe</span><span class="p">))</span><span class="w">    </span>
 </pre></div>
 </div>
 </div>
@@ -7896,9 +7936,9 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Mutate Subscribe as a factor</span>
-<span class="n">players_clean</span> <span class="o">&lt;-</span> <span class="n">players_clean</span> <span class="o">|&gt;</span>
-  <span class="n">mutate</span><span class="p">(</span><span class="n">subscribe</span> <span class="o">=</span> <span class="k">as</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">subscribe</span><span class="p">))</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Mutate Subscribe as a factor</span>
+<span class="n">players_clean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">players_clean</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">subscribe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.factor</span><span class="p">(</span><span class="n">subscribe</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -7912,11 +7952,11 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Creating training and test sets</span>
-<span class="nb">set</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
-<span class="n">players_split</span> <span class="o">&lt;-</span> <span class="n">initial_split</span><span class="p">(</span><span class="n">players_clean</span><span class="p">,</span> <span class="n">prop</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">strata</span> <span class="o">=</span> <span class="n">subscribe</span><span class="p">)</span>
-<span class="n">players_train</span> <span class="o">&lt;-</span> <span class="n">training</span><span class="p">(</span><span class="n">players_split</span><span class="p">)</span>
-<span class="n">players_test</span> <span class="o">&lt;-</span> <span class="n">testing</span><span class="p">(</span><span class="n">players_split</span><span class="p">)</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Creating training and test sets</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">players_split</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">initial_split</span><span class="p">(</span><span class="n">players_clean</span><span class="p">,</span><span class="w"> </span><span class="n">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">,</span><span class="w"> </span><span class="n">strata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subscribe</span><span class="p">)</span>
+<span class="n">players_train</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">training</span><span class="p">(</span><span class="n">players_split</span><span class="p">)</span>
+<span class="n">players_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">testing</span><span class="p">(</span><span class="n">players_split</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7930,8 +7970,8 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Create recipe with Age and played_hours as the predictor and subscribe as the response variable</span>
-<span class="n">players_recipe</span> <span class="o">&lt;-</span> <span class="n">recipe</span><span class="p">(</span><span class="n">subscribe</span> <span class="o">~</span> <span class="n">Age</span> <span class="o">+</span> <span class="n">played_hours</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">players_train</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">step_normalize</span><span class="p">(</span><span class="n">all_predictors</span><span class="p">())</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Create recipe with Age and played_hours as the predictor and subscribe as the response variable</span>
+<span class="n">players_recipe</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">recipe</span><span class="p">(</span><span class="n">subscribe</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">played_hours</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">players_train</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">step_normalize</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -7945,14 +7985,14 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Create model &amp; workflow</span>
-<span class="n">players_spec</span> <span class="o">&lt;-</span> <span class="n">nearest_neighbor</span><span class="p">(</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">"classification"</span><span class="p">,</span> <span class="n">neighbors</span> <span class="o">=</span> <span class="n">tune</span><span class="p">(),</span>         
-  <span class="n">weight_func</span> <span class="o">=</span> <span class="s2">"rectangular"</span><span class="p">)</span> <span class="o">|&gt;</span>
-  <span class="n">set_engine</span><span class="p">(</span><span class="s2">"kknn"</span><span class="p">)</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Create model &amp; workflow</span>
+<span class="n">players_spec</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nearest_neighbor</span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"classification"</span><span class="p">,</span><span class="w"> </span><span class="n">neighbors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">tune</span><span class="p">(),</span><span class="w">         </span>
+<span class="w">  </span><span class="n">weight_func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rectangular"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">set_engine</span><span class="p">(</span><span class="s">"kknn"</span><span class="p">)</span>
 
-<span class="n">players_workflow</span> <span class="o">&lt;-</span> <span class="n">workflow</span><span class="p">()</span> <span class="o">|&gt;</span>
-  <span class="n">add_model</span><span class="p">(</span><span class="n">players_spec</span><span class="p">)</span> <span class="o">|&gt;</span>
-  <span class="n">add_recipe</span><span class="p">(</span><span class="n">players_recipe</span><span class="p">)</span>
+<span class="n">players_workflow</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">workflow</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">add_model</span><span class="p">(</span><span class="n">players_spec</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">add_recipe</span><span class="p">(</span><span class="n">players_recipe</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7966,32 +8006,32 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">set</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<div class="highlight hl-r"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
 <span class="c1"># Model tuning</span>
-<span class="n">folds</span> <span class="o">&lt;-</span> <span class="n">vfold_cv</span><span class="p">(</span><span class="n">players_train</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">strata</span> <span class="o">=</span> <span class="n">subscribe</span><span class="p">)</span>
+<span class="n">folds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vfold_cv</span><span class="p">(</span><span class="n">players_train</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">strata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subscribe</span><span class="p">)</span>
 
-<span class="n">players_grid</span> <span class="o">&lt;-</span> <span class="n">tibble</span><span class="p">(</span><span class="n">neighbors</span> <span class="o">=</span> <span class="n">seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">players_grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span><span class="n">neighbors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">51</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
 
-<span class="n">players_tuned</span> <span class="o">&lt;-</span> <span class="n">tune_grid</span><span class="p">(</span><span class="n">players_workflow</span><span class="p">,</span> <span class="n">resamples</span> <span class="o">=</span> <span class="n">folds</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">players_grid</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="n">metric_set</span><span class="p">(</span><span class="n">accuracy</span><span class="p">))</span>
+<span class="n">players_tuned</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tune_grid</span><span class="p">(</span><span class="n">players_workflow</span><span class="p">,</span><span class="w"> </span><span class="n">resamples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">folds</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">players_grid</span><span class="p">,</span><span class="w"> </span><span class="n">metrics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">metric_set</span><span class="p">(</span><span class="n">accuracy</span><span class="p">))</span>
 
-<span class="n">results</span> <span class="o">&lt;-</span> <span class="n">collect_metrics</span><span class="p">(</span><span class="n">players_tuned</span><span class="p">)</span>
+<span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">collect_metrics</span><span class="p">(</span><span class="n">players_tuned</span><span class="p">)</span>
 
-<span class="n">select_best_k</span> <span class="o">&lt;-</span> <span class="n">results</span> <span class="o">|&gt;</span>
-  <span class="nb">filter</span><span class="p">(</span><span class="o">.</span><span class="n">metric</span> <span class="o">==</span> <span class="s2">"accuracy"</span><span class="p">)</span> <span class="o">|&gt;</span>
-  <span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">mean</span><span class="p">))</span>
-    
+<span class="n">select_best_k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">.metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"accuracy"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">mean</span><span class="p">))</span>
+<span class="w">    </span>
 <span class="c1">#Figure 4</span>
 
-<span class="n">select_best_k</span> <span class="o">|&gt;</span>
-  <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mean</span><span class="p">))</span> <span class="o">+</span>
-  <span class="n">geom_line</span><span class="p">()</span> <span class="o">+</span>
-  <span class="n">geom_point</span><span class="p">()</span> <span class="o">+</span>
-  <span class="n">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">"Cross-validated Accuracy for Different K Values"</span><span class="p">,</span>
-       <span class="n">x</span> <span class="o">=</span> <span class="s2">"Number of Neighbors (k)"</span><span class="p">,</span>
-       <span class="n">y</span> <span class="o">=</span> <span class="s2">"Mean Accuracy"</span><span class="p">)</span> <span class="o">+</span> <span class="n">theme</span><span class="p">(</span><span class="n">text</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">))</span>
+<span class="n">select_best_k</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">neighbors</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_line</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Cross-validated Accuracy for Different K Values"</span><span class="p">,</span>
+<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Number of Neighbors (k)"</span><span class="p">,</span>
+<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Mean Accuracy"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">))</span>
 
 <span class="c1"># Therefore, we notice that the best K value is 9, so we will store it. </span>
-<span class="n">best_k</span> <span class="o">&lt;-</span> <span class="mi">9</span>
+<span class="n">best_k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">9</span>
 </pre></div>
 </div>
 </div>
@@ -8028,20 +8068,20 @@ Those features include:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Rebuild with the best K </span>
-<span class="n">players_model_bestk</span> <span class="o">&lt;-</span> <span class="n">nearest_neighbor</span> <span class="p">(</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">"classification"</span><span class="p">,</span><span class="n">neighbors</span> <span class="o">=</span> <span class="n">best_k</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">set_engine</span><span class="p">(</span><span class="s2">"kknn"</span><span class="p">)</span>
-<span class="n">players_workflow_bestk</span> <span class="o">&lt;-</span> <span class="n">workflow</span><span class="p">()</span> <span class="o">|&gt;</span>
-  <span class="n">add_model</span><span class="p">(</span><span class="n">players_model_bestk</span><span class="p">)</span> <span class="o">|&gt;</span>
-  <span class="n">add_recipe</span><span class="p">(</span><span class="n">players_recipe</span><span class="p">)</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Rebuild with the best K </span>
+<span class="n">players_model_bestk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nearest_neighbor </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"classification"</span><span class="p">,</span><span class="n">neighbors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">best_k</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">set_engine</span><span class="p">(</span><span class="s">"kknn"</span><span class="p">)</span>
+<span class="n">players_workflow_bestk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">workflow</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">add_model</span><span class="p">(</span><span class="n">players_model_bestk</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">add_recipe</span><span class="p">(</span><span class="n">players_recipe</span><span class="p">)</span>
 
 
-<span class="n">players_fit_bestk</span> <span class="o">&lt;-</span> <span class="n">fit</span><span class="p">(</span><span class="n">players_workflow_bestk</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">players_train</span><span class="p">)</span>
+<span class="n">players_fit_bestk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="n">players_workflow_bestk</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">players_train</span><span class="p">)</span>
 <span class="c1"># Predict &amp; generate Accuracy and Confusion matrix</span>
-<span class="n">prediction</span> <span class="o">&lt;-</span> <span class="n">predict</span><span class="p">(</span><span class="n">players_fit_bestk</span><span class="p">,</span> <span class="n">players_test</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">"class"</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">bind_cols</span><span class="p">(</span><span class="n">players_test</span> <span class="o">|&gt;</span> <span class="n">select</span><span class="p">(</span><span class="n">subscribe</span><span class="p">))</span>
-<span class="n">metrics</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">truth</span> <span class="o">=</span> <span class="n">subscribe</span><span class="p">,</span> <span class="n">estimate</span> <span class="o">=</span> <span class="o">.</span><span class="n">pred_class</span><span class="p">)</span>
-<span class="n">conf_mat</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">truth</span> <span class="o">=</span> <span class="n">subscribe</span><span class="p">,</span> <span class="n">estimate</span> <span class="o">=</span> <span class="o">.</span><span class="n">pred_class</span><span class="p">)</span>
+<span class="n">prediction</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">players_fit_bestk</span><span class="p">,</span><span class="w"> </span><span class="n">players_test</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"class"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">bind_cols</span><span class="p">(</span><span class="n">players_test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">subscribe</span><span class="p">))</span>
+<span class="nf">metrics</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subscribe</span><span class="p">,</span><span class="w"> </span><span class="n">estimate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.pred_class</span><span class="p">)</span>
+<span class="nf">conf_mat</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span><span class="w"> </span><span class="n">truth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subscribe</span><span class="p">,</span><span class="w"> </span><span class="n">estimate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.pred_class</span><span class="p">)</span>
 
-<span class="n">prediction_1</span> <span class="o">&lt;-</span> <span class="n">prediction</span> <span class="o">|&gt;</span> <span class="n">bind_cols</span><span class="p">(</span><span class="n">players_test</span> <span class="o">|&gt;</span> <span class="n">select</span><span class="p">(</span><span class="n">Age</span><span class="p">,</span> <span class="n">played_hours</span><span class="p">))</span> <span class="o">|&gt;</span> <span class="n">mutate</span><span class="p">(</span><span class="n">correct</span> <span class="o">=</span> <span class="p">(</span><span class="o">.</span><span class="n">pred_class</span> <span class="o">==</span> <span class="n">subscribe</span><span class="p">))</span>
+<span class="n">prediction_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prediction</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">bind_cols</span><span class="p">(</span><span class="n">players_test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">played_hours</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">mutate</span><span class="p">(</span><span class="n">correct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">.pred_class</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">subscribe</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -8086,9 +8126,9 @@ Prediction FALSE TRUE
 <div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Created scatterplot graph of KNN Classification results on the Test Set</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Created scatterplot graph of KNN Classification results on the Test Set</span>
 <span class="c1">#Figure 5</span>
-<span class="n">players_knn_scatter</span> <span class="o">&lt;-</span> <span class="n">prediction_1</span> <span class="o">|&gt;</span> <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Age</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">played_hours</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="o">.</span><span class="n">pred_class</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">correct</span><span class="p">),</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">)</span> <span class="o">+</span> <span class="n">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">"KNN Classification Results on the Test Set"</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">"Age (years)"</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">"Played Hours"</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">"Predicted Subscribe"</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="s2">"Prediction Correct?"</span><span class="p">)</span> <span class="o">+</span>  <span class="n">theme</span><span class="p">(</span><span class="n">text</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">))</span>
+<span class="n">players_knn_scatter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prediction_1</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">played_hours</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.pred_class</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">correct</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"KNN Classification Results on the Test Set"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Age (years)"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Played Hours"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Predicted Subscribe"</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Prediction Correct?"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">))</span>
 <span class="n">players_knn_scatter</span>
 </pre></div>
 </div>
@@ -8127,6 +8167,45 @@ Prediction FALSE TRUE
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Discussion:">Discussion:<a class="anchor-link" href="#Discussion:">¶</a></h2><p>After analysis of the dataset, our prediction model was determined to be <em><strong>65% accurate for predicting subscription status</strong></em>. Because the response variable is binary, this level of accuracy is only slightly better than random guessing (50%) and therefore indicates that the model does not perform particularly well.</p>
 <p>From analyzing Figure 2, we can see that the majority of subscribers are around the age of 15-25. In the plot in Figure 3, we can infer that the majority of players with 25+ hours are subscribed, with only players in the lowest played hours group containing non-subscribers. Our findings supported our initial prediction that more played hours would result in a higher subscription rate. The age predictor, however, did not support the initial prediction that the different spending habits of different ages would result in different subscription rates. Due to the majority of players being aged 15-30, age is not a strong predictor of subscription status. These findings can allow the game creators to further cater to an audience that does not subscribe, increasing potential profits. For example, the game developers can target more players aged in the 20-30 range to further increase the percentage of subscribers. Despite these findings, future research can be done to determine if other factors, such as experience, impact subscription rate or if they only impact the other predictors. Understanding these things would allow us to create a more accurate prediction model that developers could use to further develop features that encourage players to subscribe.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=50069bf9-7754-4935-bcbf-cb0c855cd5a5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-r"><pre><span></span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fa017a70-8077-452b-96b6-10fea3b54688">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Our GitHub Repo: <a href="https://github.com/chantalfl18/DSCI-Final-Project">https://github.com/chantalfl18/DSCI-Final-Project</a></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=deaa8012-a22f-4502-807b-504608d7e2f7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-r"><pre><span></span><span class="w"> </span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
